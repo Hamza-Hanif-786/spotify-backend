@@ -1,6 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Scope } from '@nestjs/common';
 
-@Injectable()
+@Injectable({
+  scope: Scope.DEFAULT,
+})
 export class SongsService {
   private readonly songs = [];
 
@@ -10,6 +12,7 @@ export class SongsService {
   }
 
   findAll() {
+    // throw new Error('Error in db while fetching records');
     return this.songs;
   }
 }
