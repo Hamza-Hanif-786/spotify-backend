@@ -1,7 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { DevConfigService } from './common/providers/DevConfigService';
 
 @Injectable()
 export class AppService {
+  constructor(private devConfigService: DevConfigService) {
+    console.log(devConfigService.getdbhost());
+  }
   getHello(): string {
     return 'Hello World!';
   }
