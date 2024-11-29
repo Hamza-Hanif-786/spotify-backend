@@ -11,7 +11,8 @@ import { LoggerMiddleware } from './common/middleware/logger/logger.middleware';
 import { SongsController } from './songs/songs.controller';
 import { DevConfigService } from './common/providers/DevConfigService';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Song } from './songs/song.entity';
+// import { Song } from './songs/song.entity';
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
@@ -21,9 +22,9 @@ import { Song } from './songs/song.entity';
       port: 5432,
       username: 'postgres',
       password: 'aptech',
-      database: 'TEST',
+      database: 'spotifydb',
       autoLoadEntities: true,
-      entities: [Song],
+      entities: [],
     }),
     SongsModule,
   ],
@@ -37,11 +38,11 @@ import { Song } from './songs/song.entity';
   ],
 })
 export class AppModule implements NestModule {
+  constructor(dataSource: DataSource) {
+    console.log('Database:', dataSource.driver.database);
+  }
   configure(consumer: MiddlewareConsumer) {
     // consumer.apply(LoggerMiddleware).forRoutes('songs');     //option 1
-    // consumer
-    //   .apply(LoggerMiddleware)
-    //   .forRoutes({ path: 'songs', method: RequestMethod.POST });   //option 2
     consumer.apply(LoggerMiddleware).forRoutes(SongsController);
   }
 }
