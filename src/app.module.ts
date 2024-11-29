@@ -21,7 +21,7 @@ import { Song } from './songs/song.entity';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'aptech',
+      password: 'Hamza1024',
       database: 'spotifydb',
       entities: [Song],
       synchronize: true,
