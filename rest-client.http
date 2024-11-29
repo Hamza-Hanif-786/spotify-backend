@@ -1,11 +1,11 @@
 ### Find All songs
-GET http://localhost:3000/songs
+GET http://localhost:5000/songs
 
 ### Find One song
-GET http://localhost:3000/songs/1
+GET http://localhost:5000/songs/1
 
 ### Create a song
-POST http://localhost:3000/songs
+POST http://localhost:5000/songs
 Content-Type: application/json
 
 {
@@ -15,11 +15,12 @@ Content-Type: application/json
     "Artist Two"
   ],
   "releasedDate": "2024-11-27",
-  "duration": "03:25"
+  "duration": "03:25",
+  "lyrics": "Example lyrics"
 }
 
 ### Update a song
-PUT http://localhost:3000/songs/1
+PUT http://localhost:5000/songs/1
 Content-Type: application/json
 
 {
@@ -29,8 +30,9 @@ Content-Type: application/json
     "Artist Two"
   ],
   "releasedDate": "2024-11-27",
-  "duration": "03:25"
+  "duration": "03:25",
+  "lyrics": "Updated lyrics"
 }
 
 ### Delete a song
-DELETE http://localhost:3000/songs/1
+DELETE http://localhost:5000/songs/1
