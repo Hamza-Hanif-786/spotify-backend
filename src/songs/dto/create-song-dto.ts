@@ -15,7 +15,7 @@ export class CreateSongDto {
   @IsNotEmpty()
   @IsArray()
   @IsString({ each: true })
-  artist: string[];
+  artists: string[];
 
   @IsNotEmpty()
   @IsDateString()
