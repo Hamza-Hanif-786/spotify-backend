@@ -10,16 +10,13 @@ import {
   HttpStatus,
   ParseIntPipe,
   Inject,
-  Scope,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDto } from './dto/create-song-dto';
 import { Connection } from 'src/common/constants/connection';
+import { Song } from './song.entity';
 
-@Controller({
-  path: 'songs',
-  scope: Scope.REQUEST,
-})
+@Controller('songs')
 export class SongsController {
   constructor(
     private songsService: SongsService,
@@ -32,12 +29,12 @@ export class SongsController {
   }
 
   @Post()
-  create(@Body() createSongDTO: CreateSongDto) {
+  create(@Body() createSongDTO: CreateSongDto): Promise<Song> {
     return this.songsService.create(createSongDTO);
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<Song[]> {
     try {
       return this.songsService.findAll();
     } catch (error) {
@@ -59,8 +56,8 @@ export class SongsController {
       new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
     )
     id: number,
-  ) {
-    return `This action returns a song ${id} and typeof of id is ${typeof id}`;
+  ): Promise<Song> {
+    return this.songsService.findOne(id);
   }
 
   @Put(':id')
@@ -69,7 +66,7 @@ export class SongsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return `This action removes a #${id} song`;
+  remove(@Param('id') id: number): Promise<void> {
+    return this.songsService.remove(id);
   }
 }
