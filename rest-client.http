@@ -1,0 +1,36 @@
+### Find All songs
+GET http://localhost:3000/songs
+
+### Find One song
+GET http://localhost:3000/songs/1
+
+### Create a song
+POST http://localhost:3000/songs
+Content-Type: application/json
+
+{
+  "title": "Example Song Title",
+  "artist": [
+    "Artist One",
+    "Artist Two"
+  ],
+  "releasedDate": "2024-11-27",
+  "duration": "03:25"
+}
+
+### Update a song
+PUT http://localhost:3000/songs/1
+Content-Type: application/json
+
+{
+  "title": "Updated Song Title",
+  "artist": [
+    "Artist One",
+    "Artist Two"
+  ],
+  "releasedDate": "2024-11-27",
+  "duration": "03:25"
+}
+
+### Delete a song
+DELETE http://localhost:3000/songs/1
