@@ -5,7 +5,7 @@ export type Connection = {
 };
 
 export const connection: Connection = {
-  CONNECTION_STRING: 'mongodb://localhost:27017',
-  DB: 'mongodb',
+  CONNECTION_STRING: 'postgres://postgres:postgres@localhost:5432',
+  DB: 'postgres',
   DBNAME: 'TEST',
 };
