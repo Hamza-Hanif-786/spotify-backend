@@ -1,11 +1,11 @@
 ### Find All songs
-GET http://localhost:5000/songs
+GET http://localhost:5000/api/songs
 
 ### Find One song
-GET http://localhost:5000/songs/1
+GET http://localhost:5000/api/songs/1
 
 ### Create a song
-POST http://localhost:5000/songs
+POST http://localhost:5000/api/songs
 Content-Type: application/json
 
 {
@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ### Update a song
-PUT http://localhost:5000/songs/1
+PUT http://localhost:5000/api/songs/1
 Content-Type: application/json
 
 {
@@ -35,4 +35,4 @@ Content-Type: application/json
 }
 
 ### Delete a song
-DELETE http://localhost:5000/songs/1
+DELETE http://localhost:5000/api/songs/1
