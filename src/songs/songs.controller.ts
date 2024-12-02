@@ -15,7 +15,15 @@ import { SongsService } from './songs.service';
 import { CreateSongDto } from './dto/create-song-dto';
 import { Connection } from 'src/common/constants/connection';
 import { Song } from './song.entity';
+import {
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
+@ApiTags('Songs')
 @Controller('songs')
 export class SongsController {
   constructor(
@@ -29,16 +37,22 @@ export class SongsController {
   }
 
   @Post()
+  @ApiOperation({ summary: 'Create a new song' })
+  @ApiResponse({ status: 201, description: 'Song created successfully' })
+  @ApiResponse({ status: 500, description: 'Server error' })
   create(@Body() createSongDTO: CreateSongDto): Promise<Song> {
     return this.songsService.create(createSongDTO);
   }
 
   @Get()
+  @ApiOperation({ summary: 'Get all songs' })
+  @ApiResponse({ status: 200, description: 'List of all cats', type: [Song] })
+  @ApiResponse({ status: 500, description: 'Server error' })
+  @ApiQuery({ name: 'title', required: false })
   findAll(): Promise<Song[]> {
     try {
       return this.songsService.findAll();
     } catch (error) {
-      // console.log('My Custom error message using consolelog', error);
       throw new HttpException(
         'Server Error',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -50,6 +64,10 @@ export class SongsController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get a song by ID' })
+  @ApiResponse({ status: 200, description: 'Song found', type: Song })
+  @ApiResponse({ status: 404, description: 'Song not found' })
+  @ApiParam({ name: 'id', description: 'Song ID', type: Number })
   findOne(
     @Param(
       'id',
@@ -66,7 +84,17 @@ export class SongsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number): Promise<void> {
+  @ApiOperation({ summary: 'Delete a song by ID' })
+  @ApiResponse({ status: 200, description: 'Song deleted successfully' })
+  @ApiResponse({ status: 404, description: 'Song not found' })
+  @ApiParam({ name: 'id', description: 'Song ID', type: Number })
+  remove(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ): Promise<void> {
     return this.songsService.remove(id);
   }
 }
