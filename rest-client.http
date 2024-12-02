@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
   "title": "Example Song Title",
-  "artist": [
+  "artists": [
     "Artist One",
     "Artist Two"
   ],
@@ -25,7 +25,7 @@ Content-Type: application/json
 
 {
   "title": "Updated Song Title",
-  "artist": [
+  "artists": [
     "Artist One",
     "Artist Two"
   ],
